@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- generator="Podcast Generator 2.7" -->
+	<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xml:lang="en" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>am1430</title>
+		<link>https://podcasts.andrewtheguy.com/am1430/</link>
+		<atom:link href="https://podcasts.andrewtheguy.com/am1430/feed.xml" rel="self" type="application/rss+xml" />
+		<description>am1430</description>
+		<generator>Podcast Generator 2.7 - http://www.podcastgenerator.net</generator>
+		<lastBuildDate>Mon, 15 Feb 2021 08:25:57 +0000</lastBuildDate>
+		<language>en</language>
+		<copyright>Your copyright notice</copyright>
+		<itunes:image href="https://podcasts.andrewtheguy.com/am1430/images/itunes_image.jpg" />
+		<image>
+		<url>https://podcasts.andrewtheguy.com/am1430/images/itunes_image.jpg</url>
+		<title>am1430</title>
+		<link>https://podcasts.andrewtheguy.com/am1430/</link>
+		</image>
+		<itunes:summary>am1430</itunes:summary>
+		<itunes:subtitle>am1430</itunes:subtitle>
+		<itunes:author>Various</itunes:author>
+		<itunes:owner>
+		<itunes:name>Various</itunes:name>
+		<itunes:email>test@nospam.com</itunes:email>
+		</itunes:owner>
+		<itunes:explicit>no</itunes:explicit>
+		
+		<itunes:category text="Arts"></itunes:category>
+		
+				<item>
+				<title>202005231730_健保縱橫</title>
+				<itunes:subtitle>Podcast Episode</itunes:subtitle>
+				<itunes:summary><![CDATA[]]></itunes:summary>
+				<description>Podcast Episode</description>
+				<link>https://podcasts.andrewtheguy.com/am1430/?name=202005231730_健保縱橫1.mp3</link>
+				<enclosure url="https://podcasts.andrewtheguy.com/am1430/media/202005231730_健保縱橫1.mp3" length="21600956" type="audio/mpeg"/>
+				<guid>https://podcasts.andrewtheguy.com/am1430/?name=202005231730_健保縱橫1.mp3</guid>
+				<itunes:duration>45:00</itunes:duration>
+				<author>test@nospam.com (Various)</author>
+				<itunes:author>Various</itunes:author>
+				<itunes:explicit>no</itunes:explicit>
+				<pubDate>Sat, 23 May 2020 17:30:00 +0000</pubDate>
+				</item>
+				
+				<item>
+				<title>202005231215_法律天地</title>
+				<itunes:subtitle>Podcast Episode</itunes:subtitle>
+				<itunes:summary><![CDATA[]]></itunes:summary>
+				<description>Podcast Episode</description>
+				<link>https://podcasts.andrewtheguy.com/am1430/?name=202005231215_法律天地1.mp3</link>
+				<enclosure url="https://podcasts.andrewtheguy.com/am1430/media/202005231215_法律天地1.mp3" length="28800956" type="audio/mpeg"/>
+				<guid>https://podcasts.andrewtheguy.com/am1430/?name=202005231215_法律天地1.mp3</guid>
+				<itunes:duration>1:00:00</itunes:duration>
+				<author>test@nospam.com (Various)</author>
+				<itunes:author>Various</itunes:author>
+				<itunes:explicit>no</itunes:explicit>
+				<pubDate>Sat, 23 May 2020 12:15:00 +0000</pubDate>
+				</item>
+				
+				<item>
+				<title>202005231200_美麗人生</title>
+				<itunes:subtitle>Podcast Episode</itunes:subtitle>
+				<itunes:summary><![CDATA[]]></itunes:summary>
+				<description>Podcast Episode</description>
+				<link>https://podcasts.andrewtheguy.com/am1430/?name=202005231200_美麗人生1.mp3</link>
+				<enclosure url="https://podcasts.andrewtheguy.com/am1430/media/202005231200_美麗人生1.mp3" length="14400956" type="audio/mpeg"/>
+				<guid>https://podcasts.andrewtheguy.com/am1430/?name=202005231200_美麗人生1.mp3</guid>
+				<itunes:duration>30:00</itunes:duration>
+				<author>test@nospam.com (Various)</author>
+				<itunes:author>Various</itunes:author>
+				<itunes:explicit>no</itunes:explicit>
+				<pubDate>Sat, 23 May 2020 12:00:00 +0000</pubDate>
+				</item>
+				
+				<item>
+				<title>202005230930_遊味人間</title>
+				<itunes:subtitle>Podcast Episode</itunes:subtitle>
+				<itunes:summary><![CDATA[]]></itunes:summary>
+				<description>Podcast Episode</description>
+				<link>https://podcasts.andrewtheguy.com/am1430/?name=202005230930_遊味人間1.mp3</link>
+				<enclosure url="https://podcasts.andrewtheguy.com/am1430/media/202005230930_遊味人間1.mp3" length="14400956" type="audio/mpeg"/>
+				<guid>https://podcasts.andrewtheguy.com/am1430/?name=202005230930_遊味人間1.mp3</guid>
+				<itunes:duration>30:00</itunes:duration>
+				<author>test@nospam.com (Various)</author>
+				<itunes:author>Various</itunes:author>
+				<itunes:explicit>no</itunes:explicit>
+				<pubDate>Sat, 23 May 2020 09:30:00 +0000</pubDate>
+				</item>
+				
+				<item>
+				<title>202005230900_鄧洪說法</title>
+				<itunes:subtitle>Podcast Episode</itunes:subtitle>
+				<itunes:summary><![CDATA[]]></itunes:summary>
+				<description>Podcast Episode</description>
+				<link>https://podcasts.andrewtheguy.com/am1430/?name=202005230900_鄧洪說法1.mp3</link>
+				<enclosure url="https://podcasts.andrewtheguy.com/am1430/media/202005230900_鄧洪說法1.mp3" length="14400956" type="audio/mpeg"/>
+				<guid>https://podcasts.andrewtheguy.com/am1430/?name=202005230900_鄧洪說法1.mp3</guid>
+				<itunes:duration>30:00</itunes:duration>
+				<author>test@nospam.com (Various)</author>
+				<itunes:author>Various</itunes:author>
+				<itunes:explicit>no</itunes:explicit>
+				<pubDate>Sat, 23 May 2020 09:00:00 +0000</pubDate>
+				</item>
+				
+				<item>
+				<title>202005212000_理財天地</title>
+				<itunes:subtitle>Podcast Episode</itunes:subtitle>
+				<itunes:summary><![CDATA[]]></itunes:summary>
+				<description>Podcast Episode</description>
+				<link>https://podcasts.andrewtheguy.com/am1430/?name=202005212000_理財天地1.mp3</link>
+				<enclosure url="https://podcasts.andrewtheguy.com/am1430/media/202005212000_理財天地1.mp3" length="64800956" type="audio/mpeg"/>
+				<guid>https://podcasts.andrewtheguy.com/am1430/?name=202005212000_理財天地1.mp3</guid>
+				<itunes:duration>2:15:00</itunes:duration>
+				<author>test@nospam.com (Various)</author>
+				<itunes:author>Various</itunes:author>
+				<itunes:explicit>no</itunes:explicit>
+				<pubDate>Thu, 21 May 2020 20:00:00 +0000</pubDate>
+				</item>
+				
+				<item>
+				<title>202005211900_人間有情</title>
+				<itunes:subtitle>Podcast Episode</itunes:subtitle>
+				<itunes:summary><![CDATA[]]></itunes:summary>
+				<description>Podcast Episode</description>
+				<link>https://podcasts.andrewtheguy.com/am1430/?name=202005211900_人間有情1.mp3</link>
+				<enclosure url="https://podcasts.andrewtheguy.com/am1430/media/202005211900_人間有情1.mp3" length="28800956" type="audio/mpeg"/>
+				<guid>https://podcasts.andrewtheguy.com/am1430/?name=202005211900_人間有情1.mp3</guid>
+				<itunes:duration>1:00:00</itunes:duration>
+				<author>test@nospam.com (Various)</author>
+				<itunes:author>Various</itunes:author>
+				<itunes:explicit>no</itunes:explicit>
+				<pubDate>Thu, 21 May 2020 19:00:00 +0000</pubDate>
+				</item>
+				
+				<item>
+				<title>202005201900_天空下的彩虹</title>
+				<itunes:subtitle>Podcast Episode</itunes:subtitle>
+				<itunes:summary><![CDATA[]]></itunes:summary>
+				<description>Podcast Episode</description>
+				<link>https://podcasts.andrewtheguy.com/am1430/?name=202005201900_天空下的彩虹1.mp3</link>
+				<enclosure url="https://podcasts.andrewtheguy.com/am1430/media/202005201900_天空下的彩虹1.mp3" length="36000956" type="audio/mpeg"/>
+				<guid>https://podcasts.andrewtheguy.com/am1430/?name=202005201900_天空下的彩虹1.mp3</guid>
+				<itunes:duration>1:15:00</itunes:duration>
+				<author>test@nospam.com (Various)</author>
+				<itunes:author>Various</itunes:author>
+				<itunes:explicit>no</itunes:explicit>
+				<pubDate>Wed, 20 May 2020 19:00:00 +0000</pubDate>
+				</item>
+				
+				<item>
+				<title>202005191100_與您同行</title>
+				<itunes:subtitle>Podcast Episode</itunes:subtitle>
+				<itunes:summary><![CDATA[]]></itunes:summary>
+				<description>Podcast Episode</description>
+				<link>https://podcasts.andrewtheguy.com/am1430/?name=202005191100_與您同行1.mp3</link>
+				<enclosure url="https://podcasts.andrewtheguy.com/am1430/media/202005191100_與您同行1.mp3" length="14400935" type="audio/mpeg"/>
+				<guid>https://podcasts.andrewtheguy.com/am1430/?name=202005191100_與您同行1.mp3</guid>
+				<itunes:duration>30:00</itunes:duration>
+				<author>test@nospam.com (Various)</author>
+				<itunes:author>Various</itunes:author>
+				<itunes:explicit>no</itunes:explicit>
+				<pubDate>Tue, 19 May 2020 11:00:00 +0000</pubDate>
+				</item>
+				
+				<item>
+				<title>202005182100_1810加油站（下）</title>
+				<itunes:subtitle>Podcast Episode</itunes:subtitle>
+				<itunes:summary><![CDATA[]]></itunes:summary>
+				<description>Podcast Episode</description>
+				<link>https://podcasts.andrewtheguy.com/am1430/?name=202005182100_1810加油站（下）1.mp3</link>
+				<enclosure url="https://podcasts.andrewtheguy.com/am1430/media/202005182100_1810加油站（下）1.mp3" length="36000935" type="audio/mpeg"/>
+				<guid>https://podcasts.andrewtheguy.com/am1430/?name=202005182100_1810加油站（下）1.mp3</guid>
+				<itunes:duration>1:15:00</itunes:duration>
+				<author>test@nospam.com (Various)</author>
+				<itunes:author>Various</itunes:author>
+				<itunes:explicit>no</itunes:explicit>
+				<pubDate>Mon, 18 May 2020 21:00:00 +0000</pubDate>
+				</item>
+				
+	</channel>
+	</rss>
+

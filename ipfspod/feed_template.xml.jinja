@@ -1,160 +1,52 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0">
-<channel>
-  <title>{{ channel.title }}</title>
-  <description>
-    {% filter forceescape %}
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title> {{ channel.title }} </title>
-          {# This is picniccss 6.5.4  #}
-          <link rel="stylesheet" href="http://localhost:8080/ipfs/QmVzUrjFxmWENtAGoquJKcT4y4p3iTD7GE1GWqgviX6SRA" />
-        </head>
-        <body>
-          <h1> {{ channel.title }} </h1>
-          <p> {{ channel.desc }} </p>
-        </body>
-      </html>
-    {% endfilter %}
-  </description>
-  <link>{{ channel.link }}</link>
-  <language>{{ channel.language }}</language>
-  <copyright>{{ channel.copyright }}</copyright>
-  <image>
-    {#
-      This is the standard offical RSS feed icon.
-      The official size limits are pretty small so think icon more than poster.
-    #}
-    <url>http://localhost:8080/ipfs/QmdhW3UzaAravidM1ZFKrKcVNNLjS9DFFMpaFGYb31mpLh</url>
-    <title> {{ channel.title }} </title>
-    <link> {{ channel.link }} </link>
-  </image>
-  <generator>ipfspod 0.1</generator>
-  <lastBuildDate>{{ now }}</lastBuildDate>
-  <pubDate>{{ now }}</pubDate>
-  <ttl>{{ channel.ttl }}</ttl>
-
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- generator="Podcast Generator 2.7" -->
+	<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xml:lang="en" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>{{ channel.title }}<</title>
+		<link>{{ channel.link }}</link>
+		<!--<atom:link href="https://podcasts.andrewtheguy.com/am1430/feed.xml" rel="self" type="application/rss+xml" />-->
+		<description>{{ channel.desc }} </description>
+		<generator>Podcast Generator 2.7 - http://www.podcastgenerator.net</generator>
+		<lastBuildDate>{{ now }}</lastBuildDate>
+		<language>en</language>
+		<copyright>Your copyright notice</copyright>
+		<itunes:image href="https://podcasts.andrewtheguy.com/am1430/images/itunes_image.jpg" />
+		<image>
+		<url>https://cloudflare-ipfs.com/ipfs/QmdhW3UzaAravidM1ZFKrKcVNNLjS9DFFMpaFGYb31mpLh</url>
+		<title>{{ channel.title }}</title>
+		<link>{{ channel.link }}<</link>
+		</image>
+		<itunes:summary>{{ channel.title }}</itunes:summary>
+		<itunes:subtitle>{{ channel.title }}</itunes:subtitle>
+		<itunes:author>Various</itunes:author>
+		<itunes:owner>
+		<itunes:name>Various</itunes:name>
+		<itunes:email>test@nospam.com</itunes:email>
+		</itunes:owner>
+		<itunes:explicit>no</itunes:explicit>
+		
+		<itunes:category text="Arts"></itunes:category>
+		
   {% for episode in episodes %}
-  <item>
-    <title>{{ episode.title }}</title>
-    <author>{{ episode.author }}</author>
-    {% for category in episode.categories %}
-      <category>{{ category }} </category>
-    {% endfor %}
-    <pubDate>{{ episode.date }}</pubDate>
-    {# If not specified, the link will default to the first attachment. #}
-    <link>{{
+				<item>
+				<title>{{ episode.title }}</title>
+				<itunes:subtitle>Podcast Episode</itunes:subtitle>
+				<itunes:summary><![CDATA[]]></itunes:summary>
+				<description>Podcast Episode</description>
+				<link>{{
       episode.link
       or episode.enclosures
-      and ("http://localhost:8080/ipfs/"+episode.enclosures[0].hash)
+      and ("https://cloudflare-ipfs.com/ipfs/"+episode.enclosures[0].hash)
     }}</link>
-    <guid>{{ episode.hash }}</guid>
-    {% for enclosure in episode.enclosures %}
-      <enclosure
-        url="http://localhost:8080/ipfs/{{ enclosure.hash }}"
-        length="{{ enclosure.len }}"
-        type="{{ enclosure.type }}" />
-    {% endfor %}
-    <description>
-      {% filter forceescape %}
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <title> {{ episode.title }} </title>
-            {# This is picniccss 6.5.4  #}
-            <link rel="stylesheet" href="http://localhost:8080/ipfs/QmVzUrjFxmWENtAGoquJKcT4y4p3iTD7GE1GWqgviX6SRA" />
-            <style type="text/css">
-              body {
-                background-color: white;
-                background-image:
-                  repeating-linear-gradient(
-                    68deg,
-                    rgba(230, 230, 230, 0.4) 0px,
-                    rgba(230, 230, 230, 0.4) 5px,
-                    rgba(0,0,0,0) 5px,
-                    rgba(0,0,0,0) 10px
-                  ),
-                  repeating-linear-gradient(
-                    128deg,
-                    rgba(230, 230, 230, 0.4) 0px,
-                    rgba(230, 230, 230, 0.4) 5px,
-                    rgba(0,0,0,0) 5px,
-                    rgba(0,0,0,0) 10px
-                  );
-                margin: 0;
-                color: #222;
-              }
-              div.page {
-                background: white;
-                width: 90%;
-                margin: 0 auto;
-                padding: 2vh 2vw;
-              }
-              .page > header {
-                font-size: 120%;
-                background-color: #ddd;
-                border-bottom: 1px solid gray;
-                display: flex;
-                padding: 1em;
-              }
-              .page > header > h1 {
-                flex: 4;
-                padding-left: 2em;
-              }
-            </style>
-          </head>
-          <body>
-            <div class="page">
-              <header>
-                <img
-                  src="http://localhost:8080/ipfs/QmdhW3UzaAravidM1ZFKrKcVNNLjS9DFFMpaFGYb31mpLh"
-                  alt="Channel logo" />
-                <h1> {{ channel.title }} <h1>
-              </header>
-              <h2> {{ episode.title }} </h2>
-              <p> {{ episode.desc }} </p>
-            </div>
-          </body>
-        </html>
-      {% endfilter %}
-    </description>
-  </item>
-  {% endfor %}
+				<!--<enclosure url="https://podcasts.andrewtheguy.com/am1430/media/202005231730_健保縱橫1.mp3" length="21600956" type="audio/mpeg"/>
+				<guid>https://podcasts.andrewtheguy.com/am1430/?name=202005231730_健保縱橫1.mp3</guid>-->
+				<!--<itunes:duration>45:00</itunes:duration>-->
+				<author>{{ episode.author }}</author>
+				<itunes:author>{{ episode.author }}</itunes:author>
+				<itunes:explicit>no</itunes:explicit>
+				<pubDate>{{ episode.date }}</pubDate><!-- substitute with file ts-->
+				</item>
+	   {% endfor %}
+	</channel>
+	</rss>
 
-  {#
-    This template is autogenerated by IPFSPod, a Python module to manage podcasts.
-    It uses Jinja for templating - you can find a synopsis of the template language here:
-    https://jinja.palletsprojects.com/en/2.11.x/templates/#synopsis
-
-    There are three variables passed to this template:
-    * `now`, the time as formatted for the RSS spec
-    * `channel`, the content of channel.json, with attributes:
-      * `title`
-      * `description`
-      * `link`
-      * `copyright`
-      * `language`
-      * `managing_editor`
-      * `ttl`
-      * `key`, the IPNS key hash used for publishing this podcast
-    * `episodes`, the content of episodes.json, as a list, with each element containing:
-      * `title`
-      * `description`
-      * `link`
-      * `author`
-      * `categories`, a list of str
-      * `date`
-      * `hash`
-      * `length`
-      * `source`
-      * `enclosures`, a list of dict, with each dict having:
-        * `hash`, the IPFS hash of the attached file
-        * `len`, the length of the file in bytes 
-        * `type`, the mimetype of the file
-    
-    If you need reference documentation for RSS, it is available here:
-    https://cyber.harvard.edu/rss/rss.html
-  #}
-</channel>
-</rss>
