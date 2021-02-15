@@ -1,52 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- generator="Podcast Generator 2.7" -->
-	<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xml:lang="en" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>{{ channel.title }}<</title>
-		<link>{{ channel.link }}</link>
-		<!--<atom:link href="https://podcasts.andrewtheguy.com/am1430/feed.xml" rel="self" type="application/rss+xml" />-->
-		<description>{{ channel.desc }} </description>
-		<generator>Podcast Generator 2.7 - http://www.podcastgenerator.net</generator>
-		<lastBuildDate>{{ now }}</lastBuildDate>
-		<language>en</language>
-		<copyright>Your copyright notice</copyright>
-		<itunes:image href="https://podcasts.andrewtheguy.com/am1430/images/itunes_image.jpg" />
-		<image>
-		<url>https://cloudflare-ipfs.com/ipfs/QmdhW3UzaAravidM1ZFKrKcVNNLjS9DFFMpaFGYb31mpLh</url>
-		<title>{{ channel.title }}</title>
-		<link>{{ channel.link }}<</link>
-		</image>
-		<itunes:summary>{{ channel.title }}</itunes:summary>
-		<itunes:subtitle>{{ channel.title }}</itunes:subtitle>
-		<itunes:author>Various</itunes:author>
-		<itunes:owner>
-		<itunes:name>Various</itunes:name>
-		<itunes:email>test@nospam.com</itunes:email>
-		</itunes:owner>
-		<itunes:explicit>no</itunes:explicit>
-		
-		<itunes:category text="Arts"></itunes:category>
-		
-  {% for episode in episodes %}
-				<item>
-				<title>{{ episode.title }}</title>
-				<itunes:subtitle>Podcast Episode</itunes:subtitle>
-				<itunes:summary><![CDATA[]]></itunes:summary>
-				<description>Podcast Episode</description>
-				<link>{{
+<!-- generator="Podcast Generator 2.7" -->
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xml:lang="en" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>{{ channel.title }}</title>
+  <link>{{ channel.link }}</link>
+  <!--<atom:link href="https://podcasts.andrewtheguy.com/am1430/feed.xml" rel="self" type="application/rss+xml" />-->
+  <description>{{ channel.desc }} </description>
+  <generator>Podcast Generator 2.7 - http://www.podcastgenerator.net</generator>
+  <lastBuildDate>{{ now }}</lastBuildDate>
+  <language>en</language>
+  <copyright>Your copyright notice</copyright>
+  <itunes:image href="https://ipfs.io/ipfs/QmdhW3UzaAravidM1ZFKrKcVNNLjS9DFFMpaFGYb31mpLh" />
+  <image>
+  <url>https://ipfs.io/ipfs/QmdhW3UzaAravidM1ZFKrKcVNNLjS9DFFMpaFGYb31mpLh</url>
+  <title>{{ channel.title }}</title>
+  <link>{{ channel.link }}</link>
+  </image>
+  <itunes:summary>{{ channel.title }}</itunes:summary>
+  <itunes:subtitle>{{ channel.title }}</itunes:subtitle>
+  <itunes:author>Various</itunes:author>
+  <itunes:owner>
+  <itunes:name>Various</itunes:name>
+  <itunes:email>test@nospam.com</itunes:email>
+  </itunes:owner>
+  <itunes:explicit>no</itunes:explicit>
+  
+  <itunes:category text="Arts"></itunes:category>
+  
+{% for episode in episodes %}
+      <item>
+      <title>{{ episode.title }}</title>
+      <itunes:subtitle>Podcast Episode</itunes:subtitle>
+      <itunes:summary><![CDATA[]]></itunes:summary>
+      <description>Podcast Episode</description>
+    <link>{{
       episode.link
       or episode.enclosures
-      and ("https://cloudflare-ipfs.com/ipfs/"+episode.enclosures[0].hash)
+      and ("https://ipfs.io/ipfs/"+episode.enclosures[0].hash)
     }}</link>
-				<!--<enclosure url="https://podcasts.andrewtheguy.com/am1430/media/202005231730_健保縱橫1.mp3" length="21600956" type="audio/mpeg"/>
-				<guid>https://podcasts.andrewtheguy.com/am1430/?name=202005231730_健保縱橫1.mp3</guid>-->
-				<!--<itunes:duration>45:00</itunes:duration>-->
-				<author>{{ episode.author }}</author>
-				<itunes:author>{{ episode.author }}</itunes:author>
-				<itunes:explicit>no</itunes:explicit>
-				<pubDate>{{ episode.date }}</pubDate><!-- substitute with file ts-->
-				</item>
-	   {% endfor %}
-	</channel>
-	</rss>
-
+    <guid>{{ episode.hash }}</guid>
+          {% for enclosure in episode.enclosures %}
+      <enclosure
+        url="https://ipfs.io/ipfs/{{ enclosure.hash }}"
+        length="{{ enclosure.len }}"
+        type="{{ enclosure.type }}" />
+    {% endfor %}
+      <!--<enclosure url="https://podcasts.andrewtheguy.com/am1430/media/202005231730_健保縱橫1.mp3" length="21600956" type="audio/mpeg"/>
+      <guid>https://podcasts.andrewtheguy.com/am1430/?name=202005231730_健保縱橫1.mp3</guid>-->
+      <!--<itunes:duration>45:00</itunes:duration>-->
+      <author>{{ episode.author }}</author>
+      <itunes:author>{{ episode.author }}</itunes:author>
+      <itunes:explicit>no</itunes:explicit>
+      <pubDate>{{ episode.date }}</pubDate><!-- substitute with file ts-->
+      </item>
+    {% endfor %}
+</channel>
+</rss>

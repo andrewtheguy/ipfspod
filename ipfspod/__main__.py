@@ -7,6 +7,7 @@ from pathlib import Path
 from datetime import datetime
 import random
 import base64
+import os
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import filetype
@@ -74,21 +75,16 @@ def run_new(args):
     home = Path(args.channel_name).absolute()
     home.mkdir()
 
-    key = args.key or (
-        subprocess
-        .check_output(["ipfs", "key", "gen", home.name])
-        .decode()
-        .strip()
-    )
+  
     metadata = dict(
         title=title,
         description=args.description or title,
-        link=args.link or "http://localhost:8080/ipns/"+key,
+        link=args.link or "https://ipfs.io/ipns/podcastipfs.andrewtheguy.com",
         copyright=args.copyright or "CC-BY 4.0 Intl.",
         language=args.language or "en",
         managing_editor=args.managing_editor or "anonymous",
         ttl=args.ttl,
-        key=key
+        key=''
     )
 
     print(
@@ -98,9 +94,9 @@ def run_new(args):
     pprint(metadata)
 
     home.joinpath("channel.json").write_text(json.dumps(metadata))
-    home.joinpath("feed_template.xml.jinja").write_text(
-        pkg_resources.read_text(ipfspod, "feed_template.xml.jinja")
-    )
+    # home.joinpath("feed_template.xml.jinja").write_text(
+    #     pkg_resources.read_text(ipfspod, "feed_template.xml.jinja")
+    # )
     home.joinpath("episodes.json").touch()
 
 
@@ -227,7 +223,7 @@ def run_publish(args):
         for line in home.joinpath("episodes.json").read_text().splitlines()
     ]
     env = Environment(
-        loader=FileSystemLoader(home.as_posix()),
+        loader=FileSystemLoader(os.path.dirname(os.path.realpath(__file__))),
         autoescape=select_autoescape(['html', 'xml', 'jinja'])
     )
     template = env.get_template("feed_template.xml.jinja")
@@ -236,16 +232,22 @@ def run_publish(args):
     feed_path.write_text(feed)
 
     if not args.dry_run:
+
         print("Publishing to IPNS. This can take 1-5 minutes.")
         file_hash = (
             subprocess
-            .check_output(["ipfs", "add", "-Q", feed_path.as_posix()])
+            .check_output(["ipfs", "add", "-Q", "-r", home.as_posix()])
             .decode()
             .strip()
         )
+        #my_env = os.environ.copy()
+        #my_env["CF_API_TOKEN"]='hghgfhgf'
         subprocess.check_call(
-            ["ipfs", "name", "publish", "--key", home.name, file_hash]
+            #["ipfs", "name", "publish", "--key", home.name, file_hash]
+            ["npx", "dnslink-cloudflare", "-d", "andrewtheguy.com", '-l', f'/ipfs/{file_hash}', '-r', '_dnslink.podcastipfs']
         )
+
+        print('podcast published under https://ipfs.io/ipns/podcastipfs.andrewtheguy.com/latest_feed.xml')
 
 
 cmd_publish.set_defaults(command=run_publish)

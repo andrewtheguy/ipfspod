@@ -42,10 +42,10 @@ python3 -m ipfspod add . \
 # Publish your channel
 
 Once you have added your episode, or a few if you want, regenerate and publish
-your new feed!
+your new feed with the cloudflare API token!
 
 ```sh
-python3 -m ipfspod publish .
+CF_API_TOKEN=token python3 -m ipfspod publish .
 
 # You can also use -n to check the results before actually publishing
 ```
