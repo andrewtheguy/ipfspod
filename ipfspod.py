@@ -9,6 +9,8 @@ from datetime import datetime
 import random
 import base64
 import os
+import git_cmd
+import shutil
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import filetype
@@ -240,14 +242,17 @@ def run_publish(args):
             .decode()
             .strip()
         )
-        #my_env = os.environ.copy()
-        #my_env["CF_API_TOKEN"]='hghgfhgf'
-        subprocess.check_call(
-            #["ipfs", "name", "publish", "--key", home.name, file_hash]
-            ["npx", "dnslink-cloudflare", "-d", "andrewtheguy.com", '-l', f'/ipfs/{file_hash}', '-r', '_dnslink.podcastipfs']
-        )
 
-        print('podcast published under https://ipfs.io/ipns/podcastipfs.andrewtheguy.com/latest_feed.xml')
+        shutil.copyfile(feed_path.as_posix(),'../podcastsnew/latest_feed.xml')
+        
+        git_cmd.git_push()
+
+        # subprocess.check_call(
+        #     #["ipfs", "name", "publish", "--key", home.name, file_hash]
+        #     ["npx", "dnslink-cloudflare", "-d", "andrewtheguy.com", '-l', f'/ipfs/{file_hash}', '-r', '_dnslink.podcastipfs']
+        # )
+
+        # print('podcast published under https://ipfs.io/ipns/podcastipfs.andrewtheguy.com/latest_feed.xml')
 
 
 cmd_publish.set_defaults(command=run_publish)
