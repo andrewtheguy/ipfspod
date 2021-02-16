@@ -10,7 +10,8 @@ whole show and without it you have nothing.
 ```sh
 # Make sure ipfs is in your $PATH
 which ipfs  # This must work or else you'll get nothing
-python3 -m pip install ipfspod  # Now install ipfspod
+pip install ipfspod  # Now install ipfspod
+pip install gitpython #install gitpython to push the feed to git
 ```
 
 # Create a new channel
@@ -21,7 +22,6 @@ parts in a moment.
 
 ```sh
 ./ipfspod.py new isnt_nature_neat
-cd isnt_nature_neat
 ```
 
 # Add an episode to your channel
@@ -32,7 +32,7 @@ want.
 > to that directory
 
 ```sh
-./ipfspod.py add . \
+./ipfspod.py add ./isnt_nature_neat \
     'Found a lizard in the back yard, neat!' \
     -f the_cool_lizard.webm
 
@@ -45,14 +45,14 @@ Once you have added your episode, or a few if you want, regenerate and publish
 your new feed to git!
 
 ```sh
-./ipfspod.py publish .
+./ipfspod.py publish ./isnt_nature_neat
 ```
 <!---
 Once you have added your episode, or a few if you want, regenerate and publish
 your new feed with the cloudflare API token!
 
 ```sh
-CF_API_TOKEN=token ./ipfspod.py publish .
+CF_API_TOKEN=token ./ipfspod.py publish ./isnt_nature_neat
 
 # You can also use -n to check the results before actually publishing
 ```
