@@ -46,8 +46,8 @@ your new feed to git!
 
 ```sh
 ./ipfspod.py publish .
-
-<strike>
+```
+<!---
 Once you have added your episode, or a few if you want, regenerate and publish
 your new feed with the cloudflare API token!
 
@@ -56,7 +56,7 @@ CF_API_TOKEN=token ./ipfspod.py publish .
 
 # You can also use -n to check the results before actually publishing
 ```
-</strike>
+--->
 
 > Contrary to video sharing sites, adding a video is fast because you don't
 > upload it. But publishing your feed can take 1-5 minutes. So when you add a
