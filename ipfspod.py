@@ -235,7 +235,7 @@ def run_publish(args):
 
     if not args.dry_run:
 
-        print("Publishing to IPNS. This can take 1-5 minutes.")
+        print("Publishing. This can take time.")
         file_hash = (
             subprocess
             .check_output(["ipfs", "add", "-Q", "-r", home.as_posix()])
