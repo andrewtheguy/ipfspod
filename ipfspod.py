@@ -243,13 +243,14 @@ def run_publish(args):
     if not args.dry_run:
 
         print("Publishing. This can take time.")
-        file_hash = (
-            subprocess
-            .check_output(["ipfs", "add", "-Q", "-r", home.as_posix()])
-            .decode()
-            .strip()
-        )
+        # file_hash = (
+        #     subprocess
+        #     .check_output(["ipfs", "add", "-Q", "-r", home.as_posix()])
+        #     .decode()
+        #     .strip()
+        # )
 
+        # https://github.com/andrewtheguy/podcastsnew
         shutil.copyfile(feed_path.as_posix(),f'../podcastsnew/{filename}')
         
         git_cmd.git_push(filename)
