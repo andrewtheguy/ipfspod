@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """ Manage IPFS podcasts via a simple command line script. """
 from argparse import ArgumentParser
 import json
@@ -17,10 +18,9 @@ except ImportError:
     # Try backported to PY<37 `importlib_resources`.
     import importlib_resources as pkg_resources
 
-import ipfspod
 
 parser = ArgumentParser(
-    description=f"Publish podcasts on IPFS (version {ipfspod.__version__})"
+    description=f"Publish podcasts on IPFS"
 )
 subparsers = parser.add_subparsers(help="Command")
 parser.set_defaults(command=lambda _: parser.print_help())

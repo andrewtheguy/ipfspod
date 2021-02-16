@@ -20,7 +20,7 @@ a lot of contexts. If you want something fancier, you can edit the displayed
 parts in a moment.
 
 ```sh
-python3 -m ipfspod new isnt_nature_neat
+./ipfspod.py new isnt_nature_neat
 cd isnt_nature_neat
 ```
 
@@ -32,7 +32,7 @@ want.
 > to that directory
 
 ```sh
-python3 -m ipfspod add . \
+./ipfspod.py add . \
     'Found a lizard in the back yard, neat!' \
     -f the_cool_lizard.webm
 
@@ -45,7 +45,7 @@ Once you have added your episode, or a few if you want, regenerate and publish
 your new feed with the cloudflare API token!
 
 ```sh
-CF_API_TOKEN=token python3 -m ipfspod publish .
+CF_API_TOKEN=token ./ipfspod.py publish .
 
 # You can also use -n to check the results before actually publishing
 ```
