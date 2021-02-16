@@ -32,8 +32,8 @@ want.
 > to that directory
 
 ```sh
-./ipfspod.py add ./isnt_nature_neat \
-    'Found a lizard in the back yard, neat!' \
+./ipfspod.py add isnt_nature_neat \
+    -t 'Found a lizard in the back yard, neat!' \
     -f the_cool_lizard.webm
 
 # Most RSS metadata is supported, like --link, --source, and --author
@@ -45,14 +45,14 @@ Once you have added your episode, or a few if you want, regenerate and publish
 your new feed to git!
 
 ```sh
-./ipfspod.py publish ./isnt_nature_neat
+./ipfspod.py publish isnt_nature_neat
 ```
 <!---
 Once you have added your episode, or a few if you want, regenerate and publish
 your new feed with the cloudflare API token!
 
 ```sh
-CF_API_TOKEN=token ./ipfspod.py publish ./isnt_nature_neat
+CF_API_TOKEN=token ./ipfspod.py publish isnt_nature_neat
 
 # You can also use -n to check the results before actually publishing
 ```

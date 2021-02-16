@@ -8,14 +8,13 @@ import sys
 PATH_OF_GIT_REPO = '../podcastsnew'  # make sure .git folder is properly configured
 COMMIT_MESSAGE = 'update contents'
 
-def git_push():
+def git_push(filename):
     print('pushing to git')   
-    try:
-        repo = Repo(PATH_OF_GIT_REPO)
-        repo.index.add('latest_feed.xml')
-        repo.index.commit(COMMIT_MESSAGE)
-        origin = repo.remote(name='origin')
-        origin.pull()
-        origin.push()
-    except:
-        print('Some error occured while pushing the code',file=sys.stderr)    
+
+    repo = Repo(PATH_OF_GIT_REPO)
+    repo.index.add(filename)
+    repo.index.commit(COMMIT_MESSAGE)
+    origin = repo.remote(name='origin')
+    origin.pull()
+    origin.push()
+ 

@@ -73,9 +73,9 @@ def run_new(args):
         args: a Namespace resulting from ArgumentParser.parse_args
     """
     channel_name = Path(args.channel_name).name
-    title = args.title or channel_name.replace("_", " ").title()
-    home = Path(args.channel_name).absolute()
-    home.mkdir()
+    title = args.title or channel_name.replace("_", " ")
+    home = Path('./channels').joinpath(args.channel_name).absolute()
+    home.mkdir(parents=True, exist_ok=True)
 
   
     metadata = dict(
@@ -114,7 +114,9 @@ cmd_add = subparsers.add_parser(
     epilog="The channel must be initialized by `ipfspod new`"
 )
 cmd_add.add_argument("channel", help="Directory for the channel to append to")
-cmd_add.add_argument("title", help="Longer, human readable episode title")
+cmd_add.add_argument(
+    "-t","--title", 
+    help="Longer, human readable episode title")
 cmd_add.add_argument(
     "-d", "--description",
     help="Detailed episode description, optionally in HTML")
@@ -138,6 +140,8 @@ cmd_add.add_argument(
 cmd_add.add_argument(
     "-s", "--source", help="Link to the feed this was forwarded from, if any")
 
+def get_channel_dir(args):
+    return Path('./channels').joinpath(args.channel).absolute()
 
 def run_add(args):
     """ Add a new episode to a channel's episode list
@@ -148,7 +152,7 @@ def run_add(args):
         -------
         args: a Namespace resulting from ArgumentParser.parse_args
     """
-    home = Path(args.channel).absolute()
+    home = get_channel_dir(args)
     channel = json.loads(home.joinpath("channel.json").read_text())
 
     # Add any videos or audio to IPFS before writing episode metadata
@@ -163,11 +167,13 @@ def run_add(args):
         file_len = Path(filename).stat().st_size
         file_type = filetype.guess_mime(filename)
         new_enclosures.append((file_hash, file_len, file_type))
+    print(args.file[0])
+    first_filename = os.path.splitext(os.path.basename(args.file[0]))[0]
 
     # Build the episode metadata JSON object
     episode = dict(
-        title=args.title,
-        description=args.description or args.title,
+        title=args.title or first_filename,
+        description=args.description or args.title or first_filename,
         link=args.link,
         author=args.author or channel['managing_editor'],
         categories=args.category,
@@ -217,7 +223,7 @@ def run_publish(args):
         -------
         args: a Namespace resulting from ArgumentParser.parse_args
         """
-    home = Path(args.channel).absolute()
+    home = get_channel_dir(args)
     channel = json.loads(home.joinpath("channel.json").read_text())
     now = datetime.utcnow().strftime(r"%a, %d %b %Y %H:%M:%S +0000")
     episodes = [
@@ -230,7 +236,8 @@ def run_publish(args):
     )
     template = env.get_template("feed_template.xml.jinja")
     feed = template.render(channel=channel, episodes=episodes, now=now)
-    feed_path = home.joinpath("latest_feed.xml")
+    filename = f'{args.channel}_feed.xml'
+    feed_path = home.joinpath(filename)
     feed_path.write_text(feed)
 
     if not args.dry_run:
@@ -243,9 +250,9 @@ def run_publish(args):
             .strip()
         )
 
-        shutil.copyfile(feed_path.as_posix(),'../podcastsnew/latest_feed.xml')
+        shutil.copyfile(feed_path.as_posix(),f'../podcastsnew/{filename}')
         
-        git_cmd.git_push()
+        git_cmd.git_push(filename)
 
         # subprocess.check_call(
         #     #["ipfs", "name", "publish", "--key", home.name, file_hash]
