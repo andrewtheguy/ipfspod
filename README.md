@@ -11,6 +11,9 @@ whole show and without it you have nothing.
 # Make sure ipfs is in your $PATH
 which ipfs  # This must work or else you'll get nothing
 pipenv install gitpython #install dependencies
+
+# run shell
+pipenv shell
 ```
 
 # Create a new channel

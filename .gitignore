@@ -135,3 +135,5 @@ dmypy.json
 *.kate-swp
 
 channels/
+
+feed_repos/

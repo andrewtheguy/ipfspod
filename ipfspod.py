@@ -247,43 +247,46 @@ def run_publish(args):
         cf = CloudFlare.CloudFlare()
 
         print("Publishing. This can take time.")
-        file_hash = (
-            subprocess
-            .check_output(["ipfs", "add", "-Q", "-r", home.as_posix()])
-            .decode()
-            .strip()
-        )
+        # file_hash = (
+        #     subprocess
+        #     .check_output(["ipfs", "add", "-Q", "-r", home.as_posix()])
+        #     .decode()
+        #     .strip()
+        # )
 
         # https://github.com/andrewtheguy/podcastsnew
-        #shutil.copyfile(feed_path.as_posix(),f'../podcastsnew/{filename}')
+        shutil.copyfile(feed_path.as_posix(),f'{git_cmd.PATH_OF_GIT_REPO}/{filename}')
         
-        #git_cmd.git_push(filename)
+        git_cmd.git_push(filename)
+
+        print(f"podcast published under https://podcasts.planethub.info/{filename}")
 
         # subprocess.check_call(
         #     #["ipfs", "name", "publish", "--key", home.name, file_hash]
         # )
 
-        domain_name = re.sub("[^A-Za-z0-9]","",args.channel)
+        # # cloudflare
+        # domain_name = re.sub("[^A-Za-z0-9]","",args.channel)
 
-        zone_name = 'planethub.info'
-        r = cf.zones.get(params={'name': zone_name})[0]
+        # zone_name = 'planethub.info'
+        # r = cf.zones.get(params={'name': zone_name})[0]
       
-        zone_id = r['id']
-        record_name = '_dnslink.'+domain_name
-        # DNS records to create
-        new_record = {'name': record_name, 'type':'TXT','content': f'dnslink=/ipfs/{file_hash}'}
+        # zone_id = r['id']
+        # record_name = '_dnslink.'+domain_name
+        # # DNS records to create
+        # new_record = {'name': record_name, 'type':'TXT','content': f'dnslink=/ipfs/{file_hash}'}
 
-        dns_record = cf.zones.dns_records.get(zone_id, params={'name': record_name + '.' + zone_name })
+        # dns_record = cf.zones.dns_records.get(zone_id, params={'name': record_name + '.' + zone_name })
 
-        dns_record_id = dns_record[0]['id'] if dns_record else None
+        # dns_record_id = dns_record[0]['id'] if dns_record else None
 
-        if dns_record_id:
-            r = cf.zones.dns_records.put(zone_id, dns_record_id, data=new_record)
-        else:
-            r = cf.zones.dns_records.post(zone_id, data=new_record)
+        # if dns_record_id:
+        #     r = cf.zones.dns_records.put(zone_id, dns_record_id, data=new_record)
+        # else:
+        #     r = cf.zones.dns_records.post(zone_id, data=new_record)
         
 
-        print(f"podcast published under https://ipfs.io/ipns/{domain_name}.{zone_name}/{filename}")
+        # print(f"podcast published under https://ipfs.io/ipns/{domain_name}.{zone_name}/{filename}")
 
 
 cmd_publish.set_defaults(command=run_publish)
