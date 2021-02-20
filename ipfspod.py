@@ -268,7 +268,7 @@ def run_publish(args):
 
         git_cmd.git_push()
 
-        print(f"podcast published under https://podcasts.planethub.info/{dest}/{filename}")
+        print(f"podcast published under https://podcasts.planethub.info/{args.channel}/{filename}")
 
         # subprocess.check_call(
         #     #["ipfs", "name", "publish", "--key", home.name, file_hash]
