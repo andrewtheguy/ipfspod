@@ -10,8 +10,7 @@ whole show and without it you have nothing.
 ```sh
 # Make sure ipfs is in your $PATH
 which ipfs  # This must work or else you'll get nothing
-pip install ipfspod  # Now install ipfspod
-pip install gitpython #install gitpython to push the feed to git
+pipenv install gitpython #install dependencies
 ```
 
 # Create a new channel
@@ -52,7 +51,7 @@ Once you have added your episode, or a few if you want, regenerate and publish
 your new feed with the cloudflare API token!
 
 ```sh
-CF_API_TOKEN=token ./ipfspod.py publish isnt_nature_neat
+CF_API_KEY=token ./ipfspod.py publish isnt_nature_neat
 
 # You can also use -n to check the results before actually publishing
 ```
