@@ -6,8 +6,8 @@ name = "pypi"
 [packages]
 gitpython = "*"
 cloudflare = "*"
-ipfshttpclient = "*"
 dirsync = "*"
+ipfshttpclient = {ref = "0.7.0a1", git = "https://github.com/ipfs-shipyard/py-ipfs-http-client"}
 
 [dev-packages]
 

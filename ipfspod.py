@@ -159,19 +159,17 @@ def run_add(args):
     home = get_channel_dir(args)
     channel = json.loads(home.joinpath("channel.json").read_text())
 
+    client = ipfshttpclient.connect() 
+
     # Add any videos or audio to IPFS before writing episode metadata
     new_enclosures = []
     for filename in args.file:
-        file_hash = (
-            subprocess
-            .check_output(["ipfs", "add", "-Q", filename])
-            .decode()
-            .strip()
-        )
+        res = client.add(filename)
+        file_hash = res['Hash']
         file_len = Path(filename).stat().st_size
         file_type = filetype.guess_mime(filename)
         new_enclosures.append((file_hash, file_len, file_type))
-    print(args.file[0])
+    #print(args.file[0])
     first_filename = os.path.splitext(os.path.basename(args.file[0]))[0]
 
     # Build the episode metadata JSON object

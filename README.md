@@ -35,8 +35,8 @@ want.
 
 ```sh
 ./ipfspod.py add isnt_nature_neat \
-    -t 'Found a lizard in the back yard, neat!' \
-    -f the_cool_lizard.webm
+    -f the_cool_lizard.webm \
+    -t 'Found a lizard in the back yard, neat!' #optional
 
 # Most RSS metadata is supported, like --link, --source, and --author
 ```

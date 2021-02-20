@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "24f87be05c41433fd83e4b07a198bcce5d704ddb45d4fb5bf217164a8e6c1476"
+            "sha256": "d243023fb18aad4d4b601d3517bea36afb679669af9b3ec0cd227d53721c3859"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,14 +16,6 @@
         ]
     },
     "default": {
-        "base58": {
-            "hashes": [
-                "sha256:171a547b4a3c61e1ae3807224a6f7aec75e364c4395e7562649d7335768001a2",
-                "sha256:8225891d501b68c843ffe30b86371f844a21c6ba00da76f52f9b998ba771fb48"
-            ],
-            "markers": "python_version >= '3.5'",
-            "version": "==2.1.0"
-        },
         "beautifulsoup4": {
             "hashes": [
                 "sha256:4c98143716ef1cb40bf7f39a8e3eec8f8b009509e74904ba3a7b315431577e35",
@@ -86,12 +78,8 @@
             "version": "==2.10"
         },
         "ipfshttpclient": {
-            "hashes": [
-                "sha256:9abc46e43e573e0e25544689bc2f264b3183de1dfcf9186d349213c164ce8216",
-                "sha256:fb2b12b249dd45c4110b946a16c03ec1eeba6789791bd425e678d93c3f631098"
-            ],
-            "index": "pypi",
-            "version": "==0.6.1"
+            "git": "https://github.com/ipfs-shipyard/py-ipfs-http-client",
+            "ref": "bcec97aa83cf0b0348d8e160c3f68dc8495dbc1b"
         },
         "jsonlines": {
             "hashes": [
@@ -100,21 +88,6 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==2.0.0"
-        },
-        "multiaddr": {
-            "hashes": [
-                "sha256:30b2695189edc3d5b90f1c303abb8f02d963a3a4edf2e7178b975eb417ab0ecf",
-                "sha256:5c0f862cbcf19aada2a899f80ef896ddb2e85614e0c8f04dd287c06c69dac95b"
-            ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
-            "version": "==0.0.9"
-        },
-        "netaddr": {
-            "hashes": [
-                "sha256:9666d0232c32d2656e5e5f8d735f58fd6c7457ce52fc21c98d45f2af78f990ac",
-                "sha256:d6cc57c7a07b1d9d2e917aa8b36ae8ce61c35ba3fcd1b83ca31c5a0ee2b5a243"
-            ],
-            "version": "==0.8.0"
         },
         "pyyaml": {
             "hashes": [
@@ -182,12 +155,6 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4'",
             "version": "==1.26.3"
-        },
-        "varint": {
-            "hashes": [
-                "sha256:a6ecc02377ac5ee9d65a6a8ad45c9ff1dac8ccee19400a5950fb51d594214ca5"
-            ],
-            "version": "==1.0.2"
         }
     },
     "develop": {}
