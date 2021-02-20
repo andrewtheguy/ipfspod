@@ -242,7 +242,10 @@ def run_publish(args):
     template = env.get_template("feed_template.xml.jinja")
     feed = template.render(channel=channel, episodes=episodes, now=now)
     dest = f'{git_cmd.PATH_OF_GIT_REPO}/{args.channel}'
-    feed_path = Path(dest).joinpath('feed.xml')
+
+    filename = 'feed.xml'
+
+    feed_path = home.joinpath(filename)
 
 
     if not args.dry_run:
@@ -259,13 +262,15 @@ def run_publish(args):
 
         git_cmd.git_clone()
 
+        feed_path.write_text(feed)
+
         # https://github.com/andrewtheguy/podcastsnew
         sync(get_channel_dir(args),dest,'sync',purge=True,create=True)
         
-        feed_path.write_text(feed)
+
         git_cmd.git_push()
 
-        print(f"podcast published under https://podcasts.planethub.info/{filename}")
+        print(f"podcast published under https://podcasts.planethub.info/{dest}/{filename}")
 
         # subprocess.check_call(
         #     #["ipfs", "name", "publish", "--key", home.name, file_hash]
