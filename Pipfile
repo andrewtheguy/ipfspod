@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 gitpython = "*"
 cloudflare = "*"
+ipfshttpclient = "*"
+dirsync = "*"
 
 [dev-packages]
 

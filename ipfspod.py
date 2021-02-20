@@ -13,6 +13,8 @@ import git_cmd
 import shutil
 import re
 import CloudFlare
+import ipfshttpclient
+from dirsync import sync
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import filetype
@@ -225,6 +227,7 @@ def run_publish(args):
         -------
         args: a Namespace resulting from ArgumentParser.parse_args
         """
+        
     home = get_channel_dir(args)
     channel = json.loads(home.joinpath("channel.json").read_text())
     now = datetime.utcnow().strftime(r"%a, %d %b %Y %H:%M:%S +0000")
@@ -238,13 +241,13 @@ def run_publish(args):
     )
     template = env.get_template("feed_template.xml.jinja")
     feed = template.render(channel=channel, episodes=episodes, now=now)
-    filename = f'{args.channel}_feed.xml'
-    feed_path = home.joinpath(filename)
-    feed_path.write_text(feed)
+    dest = f'{git_cmd.PATH_OF_GIT_REPO}/{args.channel}'
+    feed_path = Path(dest).joinpath('feed.xml')
+
 
     if not args.dry_run:
         # see https://github.com/cloudflare/python-cloudflare#providing-cloudflare-username-and-api-key for configuring api key
-        cf = CloudFlare.CloudFlare()
+        #cf = CloudFlare.CloudFlare()
 
         print("Publishing. This can take time.")
         # file_hash = (
@@ -254,10 +257,13 @@ def run_publish(args):
         #     .strip()
         # )
 
+        git_cmd.git_clone()
+
         # https://github.com/andrewtheguy/podcastsnew
-        shutil.copyfile(feed_path.as_posix(),f'{git_cmd.PATH_OF_GIT_REPO}/{filename}')
+        sync(get_channel_dir(args),dest,'sync',purge=True,create=True)
         
-        git_cmd.git_push(filename)
+        feed_path.write_text(feed)
+        git_cmd.git_push()
 
         print(f"podcast published under https://podcasts.planethub.info/{filename}")
 

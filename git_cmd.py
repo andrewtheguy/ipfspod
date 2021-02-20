@@ -19,12 +19,12 @@ def git_clone():
         Repo.clone_from('git@github.com-andrew:andrewtheguy/podcastsnew.git', PATH_OF_GIT_REPO)
 
 
-def git_push(filename):
-    git_clone()
+def git_push():
+
     print('pushing to git')   
 
     repo = Repo(PATH_OF_GIT_REPO)
-    repo.index.add(filename)
+    repo.git.add('--all')
     repo.git.commit('-m',COMMIT_MESSAGE)
     origin = repo.remote(name='origin')
     origin.pull()

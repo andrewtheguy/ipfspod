@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b513f9a895f0e6dd2649ed2b91e44dc8992873d2138280b9ff16741426794115"
+            "sha256": "24f87be05c41433fd83e4b07a198bcce5d704ddb45d4fb5bf217164a8e6c1476"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,14 @@
         ]
     },
     "default": {
+        "base58": {
+            "hashes": [
+                "sha256:171a547b4a3c61e1ae3807224a6f7aec75e364c4395e7562649d7335768001a2",
+                "sha256:8225891d501b68c843ffe30b86371f844a21c6ba00da76f52f9b998ba771fb48"
+            ],
+            "markers": "python_version >= '3.5'",
+            "version": "==2.1.0"
+        },
         "beautifulsoup4": {
             "hashes": [
                 "sha256:4c98143716ef1cb40bf7f39a8e3eec8f8b009509e74904ba3a7b315431577e35",
@@ -46,6 +54,13 @@
             "index": "pypi",
             "version": "==2.8.15"
         },
+        "dirsync": {
+            "hashes": [
+                "sha256:1e3a4cd2b639a2eae5afc03c2b8a003fc43d56a0da5114db579386da9a14a8be"
+            ],
+            "index": "pypi",
+            "version": "==2.2.5"
+        },
         "gitdb": {
             "hashes": [
                 "sha256:91f36bfb1ab7949b3b40e23736db18231bf7593edada2ba5c3a174a7b23657ac",
@@ -70,6 +85,14 @@
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==2.10"
         },
+        "ipfshttpclient": {
+            "hashes": [
+                "sha256:9abc46e43e573e0e25544689bc2f264b3183de1dfcf9186d349213c164ce8216",
+                "sha256:fb2b12b249dd45c4110b946a16c03ec1eeba6789791bd425e678d93c3f631098"
+            ],
+            "index": "pypi",
+            "version": "==0.6.1"
+        },
         "jsonlines": {
             "hashes": [
                 "sha256:6fdd03104c9a421a1ba587a121aaac743bf02d8f87fa9cdaa3b852249a241fe8",
@@ -77,6 +100,21 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==2.0.0"
+        },
+        "multiaddr": {
+            "hashes": [
+                "sha256:30b2695189edc3d5b90f1c303abb8f02d963a3a4edf2e7178b975eb417ab0ecf",
+                "sha256:5c0f862cbcf19aada2a899f80ef896ddb2e85614e0c8f04dd287c06c69dac95b"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==0.0.9"
+        },
+        "netaddr": {
+            "hashes": [
+                "sha256:9666d0232c32d2656e5e5f8d735f58fd6c7457ce52fc21c98d45f2af78f990ac",
+                "sha256:d6cc57c7a07b1d9d2e917aa8b36ae8ce61c35ba3fcd1b83ca31c5a0ee2b5a243"
+            ],
+            "version": "==0.8.0"
         },
         "pyyaml": {
             "hashes": [
@@ -113,6 +151,14 @@
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
             "version": "==2.25.1"
         },
+        "six": {
+            "hashes": [
+                "sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259",
+                "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==1.15.0"
+        },
         "smmap": {
             "hashes": [
                 "sha256:7bfcf367828031dc893530a29cb35eb8c8f2d7c8f2d0989354d75d24c8573714",
@@ -136,6 +182,12 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4'",
             "version": "==1.26.3"
+        },
+        "varint": {
+            "hashes": [
+                "sha256:a6ecc02377ac5ee9d65a6a8ad45c9ff1dac8ccee19400a5950fb51d594214ca5"
+            ],
+            "version": "==1.0.2"
         }
     },
     "develop": {}
