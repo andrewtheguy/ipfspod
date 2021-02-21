@@ -8,11 +8,11 @@ First, you need to install [Interplanetary Filesystem](ipfs.io). It powers the
 whole show and without it you have nothing.
 
 ```sh
-# Make sure ipfs api is working
+# Make sure ipfs api is working, otherwise start ipfs
 curl -X POST http://127.0.0.1:5001/api/v0/version
 
 #install dependencies
-pipenv install gitpython 
+pipenv install
 
 # run shell
 pipenv shell
