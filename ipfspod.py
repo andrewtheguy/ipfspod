@@ -310,13 +310,15 @@ def download_with_curl(gateway,hash):
     #print('...')
     url = f"https://{gateway}/ipfs/{hash}"
     print(url)
-    #return
-    p = Popen(["curl", url] , stdout=DEVNULL, stderr=sys.stderr)
-    p.wait()
 
-'''
+    Path(f"./test/{gateway}").mkdir(parents=True, exist_ok=True)
 
-'''
+    with open(f"./test/{gateway}/{hash}.log", "wb") as f:
+        p = Popen(["curl", url] , stdout=DEVNULL, stderr=f)
+        p.wait() # wait for process to finish; this also sets the returncode variable inside 'res'
+        if p.returncode != 0:
+            raise Exception(f"{url} download failed, exit code {p.returncode}")
+
 cmd_test_gateway = subparsers.add_parser(
     "test_gateway",
     description="test downloading episodes through a gateway",

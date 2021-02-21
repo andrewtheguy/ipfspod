@@ -137,3 +137,5 @@ dmypy.json
 channels/
 
 feed_repos/
+
+test/
