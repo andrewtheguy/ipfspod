@@ -15,6 +15,7 @@ import re
 #import CloudFlare
 import ipfshttpclient
 from dirsync import sync
+import requests
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import filetype
@@ -297,6 +298,70 @@ def run_publish(args):
 
 
 cmd_publish.set_defaults(command=run_publish)
+
+from subprocess import Popen, PIPE, DEVNULL
+import glob,sys
+
+
+
+'''
+https://dweb.link/ipfs/:hash
+https://cf-ipfs.com/ipfs/:hash
+https://cloudflare-ipfs.com/ipfs/:hash
+https://gateway.ipfs.io/ipfs/:hash
+https://gateway.ravenland.org/ipfs/:hash
+https://hardbin.com/ipfs/:hash
+'''
+cmd_test_gateway = subparsers.add_parser(
+    "test_gateway",
+    description="test_gateway",
+    epilog="test_gateway"
+)
+cmd_test_gateway.add_argument(
+    "channel", help="Channel directory (containing metadata.json)")
+cmd_test_gateway.add_argument(
+    "gateway", help="gateway domain")
+def run_test_gateway(args):
+    """
+    test downloading through a specific gateway
+    """
+
+    home = get_channel_dir(args)
+    episode_db = TinyDB(home.joinpath("episodes.json").as_posix())
+    episodes = episode_db.all()
+    print(episodes)
+
+    cmds_list = [["curl", f"https://{args.gateway}/ipfs/{episode['enclosures'][0]['hash']}"] for episode in episodes]
+
+    procs_list = [Popen(cmd, stdout=DEVNULL, stderr=sys.stderr) for cmd in cmds_list]
+
+    # while True:
+    #     process = procs_list[0]
+    #     output = process.stderr.readline()
+    #     if output == '' and process.poll() is not None:
+    #         break
+    #     if output:
+    #         print(output)
+
+    for proc in procs_list:
+        proc.wait()
+
+    # for episode in episodes:
+    #
+    #     print(url)
+    #     with requests.get(url, stream=True) as r:
+    #       r.raise_for_status() # raise exception for bad requests
+    #       for chunk in r.iter_content():
+    #           # If you have chunk encoded response uncomment if
+    #           # and set chunk_size parameter to None.
+    #           # if chunk:
+    #           with open(os.devnull, 'wb') as pipe:
+    #               pipe.write(chunk)
+
+
+
+
+cmd_test_gateway.set_defaults(command=run_test_gateway)
 
 # Finally, use the new parser
 all_args = parser.parse_args()
