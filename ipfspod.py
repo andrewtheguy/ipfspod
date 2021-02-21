@@ -310,7 +310,7 @@ def download_with_curl(gateway,hash):
     #print('...')
     url = f"https://{gateway}/ipfs/{hash}"
     print(url)
-    return
+    #return
     p = Popen(["curl", url] , stdout=DEVNULL, stderr=sys.stderr)
     p.wait()
 
@@ -330,31 +330,33 @@ def run_test_gateway(args):
     """
     test downloading through gateways
     """
+    if __name__ == '__main__':
+        gateways = [
+            'dweb.link',
+            'cloudflare-ipfs.com',
+            'gateway.ipfs.io',
+            'gateway.ravenland.org',
+            'hardbin.com',
+            'trusti.id',
+        ]
 
-    gateways = ('dweb.link',
-'cloudflare-ipfs.com',
-'gateway.ipfs.io',
-'gateway.ravenland.org',
-'hardbin.com',
-'trusti.id',)
+        home = get_channel_dir(args)
+        episode_db = TinyDB(home.joinpath("episodes.json").as_posix())
+        episodes = episode_db.all()
+        #print(episodes)
 
-    home = get_channel_dir(args)
-    episode_db = TinyDB(home.joinpath("episodes.json").as_posix())
-    episodes = episode_db.all()
-    #print(episodes)
+        arr = [(gateway,episode['enclosures'][0]['hash']) for gateway in gateways for episode in episodes]
+        print(arr)
+        with Pool(5) as p:
+            r = p.starmap_async(download_with_curl, arr)
+            r.wait()
 
-    with ThreadPoolExecutor(max_workers=4) as e:
-        for gateway in gateways:
-            for episode in episodes:
-                e.submit(download_with_curl, gateway,episode['enclosures'][0]['hash'])
-                #e.join()
-
-    # cmds_list = [["curl", f"https://{args.gateway}/ipfs/{episode['enclosures'][0]['hash']}"] for episode in episodes]
-    #
-    # procs_list = [Popen(cmd, stdout=DEVNULL, stderr=sys.stderr) for cmd in cmds_list]
-    #
-    # for proc in procs_list:
-    #     proc.wait()
+        # cmds_list = [["curl", f"https://{args.gateway}/ipfs/{episode['enclosures'][0]['hash']}"] for episode in episodes]
+        #
+        # procs_list = [Popen(cmd, stdout=DEVNULL, stderr=sys.stderr) for cmd in cmds_list]
+        #
+        # for proc in procs_list:
+        #     proc.wait()
 
 
 
