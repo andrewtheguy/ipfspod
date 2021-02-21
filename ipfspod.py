@@ -360,12 +360,12 @@ def run_test_gateway(args):
 
         #one by one
         for gateway in gateways:
-            arr = [(gateway, episode['enclosures'][0]['hash']) for episode in episodes]
+            arr = [(gateway, episode['enclosure']['file_hash']) for episode in episodes]
             with Pool(5) as p:
                 r = p.starmap_async(download_with_curl, arr)
                 r.get()
 
-        # cmds_list = [["curl", f"https://{args.gateway}/ipfs/{episode['enclosures'][0]['hash']}"] for episode in episodes]
+        # cmds_list = [["curl", f"https://{args.gateway}/ipfs/{episode['enclosure']['file_hash']}"] for episode in episodes]
         #
         # procs_list = [Popen(cmd, stdout=DEVNULL, stderr=sys.stderr) for cmd in cmds_list]
         #
