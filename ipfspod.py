@@ -12,7 +12,7 @@ import os
 import git_cmd
 import shutil
 import re
-import CloudFlare
+#import CloudFlare
 import ipfshttpclient
 from dirsync import sync
 
@@ -193,6 +193,8 @@ def run_add(args):
     episode_db = TinyDB(home.joinpath("episodes.json").as_posix())
 
     episode_db.insert(episode)
+
+    print(f"added {first_filename}")
 
 
 cmd_add.set_defaults(command=run_add)

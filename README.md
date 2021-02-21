@@ -41,6 +41,9 @@ want.
     -t 'Found a lizard in the back yard, neat!' #optional
 
 # Most RSS metadata is supported, like --link, --source, and --author
+
+# loop through folder
+for f in /Users/it3/tmp/add/*.mp3; do ./ipfspod.py add isnt_nature_neat -f $f; done
 ```
 
 # Publish your channel
