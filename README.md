@@ -65,8 +65,7 @@ CF_API_KEY=token ./ipfspod.py publish isnt_nature_neat
 ```
 --->
 
-> Contrary to video sharing sites, adding a video is fast because you don't
-> upload it. But publishing your feed can take 1-5 minutes. So when you add a
-> post, we don't publish it automatically. That way you can add several posts
-> at once and only wait for it to publish once. Conveniently, publishing
-> takes about the same amount of time no matter how large the video.
+# Test download
+```
+./ipfspod.py test_gateway isnt_nature_neat
+```
