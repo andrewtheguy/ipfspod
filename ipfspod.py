@@ -310,13 +310,14 @@ def download_with_curl(gateway,hash):
     #print('...')
     url = f"https://{gateway}/ipfs/{hash}"
     print('downloading ' + url)
-
     Path(f"./test/{gateway}").mkdir(parents=True, exist_ok=True)
 
     with open(f"./test/{gateway}/{hash}.log", "wb") as f:
         p = Popen(["curl", url] , stdout=DEVNULL, stderr=f)
         p.wait() # wait for process to finish; this also sets the returncode variable inside 'res'
+        #print(p.returncode)
         if p.returncode != 0:
+            #print('chafa')
             raise Exception(f"{url} download failed, exit code {p.returncode}")
 
 cmd_test_gateway = subparsers.add_parser(
@@ -354,7 +355,7 @@ def run_test_gateway(args):
             arr = [(gateway, episode['enclosures'][0]['hash']) for episode in episodes]
             with Pool(5) as p:
                 r = p.starmap_async(download_with_curl, arr)
-                r.wait()
+                r.get()
 
         # cmds_list = [["curl", f"https://{args.gateway}/ipfs/{episode['enclosures'][0]['hash']}"] for episode in episodes]
         #
