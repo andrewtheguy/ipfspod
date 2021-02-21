@@ -334,12 +334,11 @@ def run_test_gateway(args):
     """
     if __name__ == '__main__':
         gateways = [
+            'ipfs.io', # the same one first
             'dweb.link',
             'cloudflare-ipfs.com',
-            'gateway.ipfs.io',
             'gateway.ravenland.org',
             'hardbin.com',
-            'trusti.id',
             'astyanax.io',
         ]
 
@@ -348,11 +347,14 @@ def run_test_gateway(args):
         episodes = episode_db.all()
         #print(episodes)
 
-        arr = [(gateway,episode['enclosures'][0]['hash']) for gateway in gateways for episode in episodes]
-        print(arr)
-        with Pool(5) as p:
-            r = p.starmap_async(download_with_curl, arr)
-            r.wait()
+        #arr = [(gateway,episode['enclosures'][0]['hash']) for gateway in gateways for episode in episodes]
+
+        #one by one
+        for gateway in gateways:
+            arr = [(gateway, episode['enclosures'][0]['hash']) for episode in episodes]
+            with Pool(5) as p:
+                r = p.starmap_async(download_with_curl, arr)
+                r.wait()
 
         # cmds_list = [["curl", f"https://{args.gateway}/ipfs/{episode['enclosures'][0]['hash']}"] for episode in episodes]
         #
