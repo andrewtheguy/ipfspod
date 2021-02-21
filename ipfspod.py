@@ -314,7 +314,7 @@ https://hardbin.com/ipfs/:hash
 '''
 cmd_test_gateway = subparsers.add_parser(
     "test_gateway",
-    description="test_gateway",
+    description="test downloading episodes through a gateway",
     epilog="test_gateway"
 )
 cmd_test_gateway.add_argument(
