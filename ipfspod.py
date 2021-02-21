@@ -309,7 +309,7 @@ def download_with_curl(gateway,hash):
     #print(url)
     #print('...')
     url = f"https://{gateway}/ipfs/{hash}"
-    print(url)
+    print('downloading ' + url)
 
     Path(f"./test/{gateway}").mkdir(parents=True, exist_ok=True)
 
