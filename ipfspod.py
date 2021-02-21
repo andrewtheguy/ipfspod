@@ -18,12 +18,7 @@ from dirsync import sync
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import filetype
-try:
-    import importlib.resources as pkg_resources
-except ImportError:
-    # Try backported to PY<37 `importlib_resources`.
-    import importlib_resources as pkg_resources
-
+from tinydb import TinyDB, Query
 
 parser = ArgumentParser(
     description=f"Publish podcasts on IPFS"
@@ -99,11 +94,12 @@ def run_new(args):
     )
     pprint(metadata)
 
-    home.joinpath("channel.json").write_text(json.dumps(metadata))
-    # home.joinpath("feed_template.xml.jinja").write_text(
-    #     pkg_resources.read_text(ipfspod, "feed_template.xml.jinja")
-    # )
-    home.joinpath("episodes.json").touch()
+    db = TinyDB(home.joinpath("channel.json").as_posix())
+    db.truncate()
+
+    db.insert(metadata)
+
+
 
 
 cmd_new.set_defaults(command=run_new)
@@ -157,7 +153,8 @@ def run_add(args):
         args: a Namespace resulting from ArgumentParser.parse_args
     """
     home = get_channel_dir(args)
-    channel = json.loads(home.joinpath("channel.json").read_text())
+    channel_db = TinyDB(home.joinpath("channel.json").as_posix())
+    channel = channel_db.all()[0]
 
     client = ipfshttpclient.connect() 
 
@@ -193,9 +190,9 @@ def run_add(args):
         source=args.source
     )
 
-    # Append this to the episode list
-    with home.joinpath("episodes.json").open("a") as episodes_file:
-        episodes_file.write(json.dumps(episode) + "\n")
+    episode_db = TinyDB(home.joinpath("episodes.json").as_posix())
+
+    episode_db.insert(episode)
 
 
 cmd_add.set_defaults(command=run_add)
@@ -229,10 +226,9 @@ def run_publish(args):
     home = get_channel_dir(args)
     channel = json.loads(home.joinpath("channel.json").read_text())
     now = datetime.utcnow().strftime(r"%a, %d %b %Y %H:%M:%S +0000")
-    episodes = [
-        json.loads(line)
-        for line in home.joinpath("episodes.json").read_text().splitlines()
-    ]
+    episode_db = TinyDB(home.joinpath("episodes.json").as_posix())
+    episodes = episode_db.all()
+
     env = Environment(
         loader=FileSystemLoader(os.path.dirname(os.path.realpath(__file__))),
         autoescape=select_autoescape(['html', 'xml', 'jinja'])
