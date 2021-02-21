@@ -300,17 +300,22 @@ def run_publish(args):
 cmd_publish.set_defaults(command=run_publish)
 
 from subprocess import Popen, PIPE, DEVNULL
+from multiprocessing import Pool
 import glob,sys
+from concurrent.futures import ThreadPoolExecutor
 
-
+def download_with_curl(gateway,hash):
+    #print('---')
+    #print(url)
+    #print('...')
+    url = f"https://{gateway}/ipfs/{hash}"
+    print(url)
+    return
+    p = Popen(["curl", url] , stdout=DEVNULL, stderr=sys.stderr)
+    p.wait()
 
 '''
-https://dweb.link/ipfs/:hash
-https://cf-ipfs.com/ipfs/:hash
-https://cloudflare-ipfs.com/ipfs/:hash
-https://gateway.ipfs.io/ipfs/:hash
-https://gateway.ravenland.org/ipfs/:hash
-https://hardbin.com/ipfs/:hash
+
 '''
 cmd_test_gateway = subparsers.add_parser(
     "test_gateway",
@@ -319,44 +324,37 @@ cmd_test_gateway = subparsers.add_parser(
 )
 cmd_test_gateway.add_argument(
     "channel", help="Channel directory (containing metadata.json)")
-cmd_test_gateway.add_argument(
-    "gateway", help="gateway domain")
+# cmd_test_gateway.add_argument(
+#     "gateway", help="gateway domain")
 def run_test_gateway(args):
     """
-    test downloading through a specific gateway
+    test downloading through gateways
     """
+
+    gateways = ('dweb.link',
+'cloudflare-ipfs.com',
+'gateway.ipfs.io',
+'gateway.ravenland.org',
+'hardbin.com',
+'trusti.id',)
 
     home = get_channel_dir(args)
     episode_db = TinyDB(home.joinpath("episodes.json").as_posix())
     episodes = episode_db.all()
-    print(episodes)
+    #print(episodes)
 
-    cmds_list = [["curl", f"https://{args.gateway}/ipfs/{episode['enclosures'][0]['hash']}"] for episode in episodes]
+    with ThreadPoolExecutor(max_workers=4) as e:
+        for gateway in gateways:
+            for episode in episodes:
+                e.submit(download_with_curl, gateway,episode['enclosures'][0]['hash'])
+                #e.join()
 
-    procs_list = [Popen(cmd, stdout=DEVNULL, stderr=sys.stderr) for cmd in cmds_list]
-
-    # while True:
-    #     process = procs_list[0]
-    #     output = process.stderr.readline()
-    #     if output == '' and process.poll() is not None:
-    #         break
-    #     if output:
-    #         print(output)
-
-    for proc in procs_list:
-        proc.wait()
-
-    # for episode in episodes:
+    # cmds_list = [["curl", f"https://{args.gateway}/ipfs/{episode['enclosures'][0]['hash']}"] for episode in episodes]
     #
-    #     print(url)
-    #     with requests.get(url, stream=True) as r:
-    #       r.raise_for_status() # raise exception for bad requests
-    #       for chunk in r.iter_content():
-    #           # If you have chunk encoded response uncomment if
-    #           # and set chunk_size parameter to None.
-    #           # if chunk:
-    #           with open(os.devnull, 'wb') as pipe:
-    #               pipe.write(chunk)
+    # procs_list = [Popen(cmd, stdout=DEVNULL, stderr=sys.stderr) for cmd in cmds_list]
+    #
+    # for proc in procs_list:
+    #     proc.wait()
 
 
 
