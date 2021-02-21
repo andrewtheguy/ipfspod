@@ -82,7 +82,7 @@ def run_new(args):
     metadata = dict(
         title=title,
         description=args.description or title,
-        link=args.link or "https://ipfs.io/ipns/podcastipfs.andrewtheguy.com",
+        link=args.link or "https://ipfs.io/",
         copyright=args.copyright or "N/A",
         language=args.language or "en",
         managing_editor=args.managing_editor or "anonymous",
@@ -162,11 +162,14 @@ def run_add(args):
 
     # Add any videos or audio to IPFS before writing episode metadata
     for file in args.file:
-        res = client.add(filename,pin=False)
+        res = client.add(file,pin=False)
         file_hash = res['Hash']
-        file_len = Path(filename).stat().st_size
-        file_type = filetype.guess_mime(filename)
-        enclosure = (file_hash, file_len, file_type)
+        file_len = Path(file).stat().st_size
+        file_type = filetype.guess_mime(file)
+        enclosure = dict(
+            file_hash=file_hash,
+            file_len=file_len,
+            file_type=file_type)
 
         filename = os.path.splitext(os.path.basename(file))[0]
 
@@ -227,10 +230,11 @@ def run_publish(args):
         """
         
     home = get_channel_dir(args)
-    channel = json.loads(home.joinpath("channel.json").read_text())
+    channel = TinyDB(home.joinpath("channel.json").as_posix()).all()[0]
     now = datetime.utcnow().strftime(r"%a, %d %b %Y %H:%M:%S +0000")
     episode_db = TinyDB(home.joinpath("episodes.json").as_posix())
     episodes = episode_db.all()
+    print(channel)
 
     env = Environment(
         loader=FileSystemLoader(os.path.dirname(os.path.realpath(__file__))),

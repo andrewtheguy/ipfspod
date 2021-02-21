@@ -4,7 +4,7 @@
 <channel>
   <title>{{ channel.title }}</title>
   <link>{{ channel.link }}</link>
-  <description>{{ channel.description }} </description>
+  <description>{{ channel.description }}</description>
   <generator>na</generator>
   <lastBuildDate>{{ now }}</lastBuildDate>
   <language>{{ channel.language }}</language>
@@ -34,20 +34,19 @@
       <description>Podcast Episode</description>
     <link>{{
       episode.link
-      or episode.enclosure.hash
+      or ("https://ipfs.io/ipfs/"+episode.enclosure.file_hash)
     }}</link>
     <guid>{{ episode.hash_md5 }}</guid>
-          {% for enclosure in episode.enclosures %}
       <enclosure
-        url="https://ipfs.io/ipfs/{{ enclosure.hash }}"
-        length="{{ enclosure.len }}"
-        type="{{ enclosure.type }}" />
-      <!--<itunes:duration>45:00</itunes:duration>-->
+        url="https://ipfs.io/ipfs/{{ episode.enclosure.file_hash }}"
+        length="{{ episode.enclosure.file_len }}"
+        type="{{ episode.enclosure.file_type }}" />
+      {# <!--<itunes:duration>45:00</itunes:duration>-->#}
       <author>{{ episode.author }}</author>
       <itunes:author>{{ episode.author }}</itunes:author>
       <itunes:explicit>no</itunes:explicit>
       <pubDate>{{ episode.date }}</pubDate>
       </item>
-    {% endfor %}
+{% endfor %}
 </channel>
 </rss>

@@ -10,8 +10,14 @@ dirsync = "*"
 ipfshttpclient = {ref = "0.7.0a1", git = "https://github.com/ipfs-shipyard/py-ipfs-http-client"}
 tinydb = "*"
 requests = "*"
+multiaddr = "*"
+jinja2 = "*"
+filetype = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true
