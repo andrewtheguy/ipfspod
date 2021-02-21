@@ -340,6 +340,7 @@ def run_test_gateway(args):
             'gateway.ravenland.org',
             'hardbin.com',
             'trusti.id',
+            'astyanax.io',
         ]
 
         home = get_channel_dir(args)
