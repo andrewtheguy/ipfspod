@@ -310,10 +310,16 @@ def download_with_curl(gateway,hash):
     #print('...')
     url = f"https://{gateway}/ipfs/{hash}"
     print('downloading ' + url)
+
+    # or api way
+    #url = f"https://{gateway}/api/v0/cat?arg={hash}"
     Path(f"./test/{gateway}").mkdir(parents=True, exist_ok=True)
+
 
     with open(f"./test/{gateway}/{hash}.log", "wb") as f:
         p = Popen(["curl", url] , stdout=DEVNULL, stderr=f)
+        # or api way
+        #p = Popen(["curl", '-X','POST', url] , stdout=DEVNULL, stderr=f)
         p.wait() # wait for process to finish; this also sets the returncode variable inside 'res'
         #print(p.returncode)
         if p.returncode != 0:
