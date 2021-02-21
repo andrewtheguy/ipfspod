@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """ Manage IPFS podcasts via a simple command line script. """
+import hashlib
 from argparse import ArgumentParser
 import json
 from pprint import pprint
@@ -82,7 +83,7 @@ def run_new(args):
         title=title,
         description=args.description or title,
         link=args.link or "https://ipfs.io/ipns/podcastipfs.andrewtheguy.com",
-        copyright=args.copyright or "CC-BY 4.0 Intl.",
+        copyright=args.copyright or "N/A",
         language=args.language or "en",
         managing_editor=args.managing_editor or "anonymous",
         ttl=args.ttl,
@@ -157,45 +158,44 @@ def run_add(args):
     channel_db = TinyDB(home.joinpath("channel.json").as_posix())
     channel = channel_db.all()[0]
 
-    client = ipfshttpclient.connect() 
+    client = ipfshttpclient.connect()
 
     # Add any videos or audio to IPFS before writing episode metadata
-    new_enclosures = []
-    for filename in args.file:
-        res = client.add(filename)
+    for file in args.file:
+        res = client.add(filename,pin=False)
         file_hash = res['Hash']
         file_len = Path(filename).stat().st_size
         file_type = filetype.guess_mime(filename)
-        new_enclosures.append((file_hash, file_len, file_type))
-    #print(args.file[0])
-    first_filename = os.path.splitext(os.path.basename(args.file[0]))[0]
+        enclosure = (file_hash, file_len, file_type)
 
-    # Build the episode metadata JSON object
-    episode = dict(
-        title=args.title or first_filename,
-        description=args.description or args.title or first_filename,
-        link=args.link,
-        author=args.author or channel['managing_editor'],
-        categories=args.category,
-        date=datetime.utcnow().strftime(r"%a, %d %b %Y %H:%M:%S +0000"),
-        enclosures=[
+        filename = os.path.splitext(os.path.basename(file))[0]
+
+        with open(file, "rb") as f:
+            file_hash = hashlib.md5()
+            while chunk := f.read(8192):
+                file_hash.update(chunk)
+        #print(file_hash.digest())
+        hash_md5 = file_hash.hexdigest()  # to get a printable str instead of bytes
+
+        # Build the episode metadata JSON object
+        episode = dict(
+            title=args.title or filename,
+            description=args.description or args.title or filename,
+            link=args.link,
+            author=args.author or channel['managing_editor'],
+            categories=args.category,
+            date=datetime.utcnow().strftime(r"%a, %d %b %Y %H:%M:%S +0000"), # <!-- TODO: substitute with file ts-->
             # Name the fields and include any we just indexed
-            dict(hash=enc[0], len=enc[1], type=enc[2])
-            for enc in args.enclosure + new_enclosures
-        ],
-        # Generates a hash like RLZtAITwyHgorjZ0HYPvl9oYsFFRhIrFhjmZAbbd410=
-        # but b64encode creates a bytes() so decode() means convert to str()
-        hash=base64.b64encode(
-            random.getrandbits(256).to_bytes(32, 'big')
-        ).decode(),
-        source=args.source
-    )
+            enclosure = enclosure,
+            hash_md5=hash_md5,
+            source=args.source
+        )
 
-    episode_db = TinyDB(home.joinpath("episodes.json").as_posix())
+        episode_db = TinyDB(home.joinpath("episodes.json").as_posix())
 
-    episode_db.insert(episode)
+        episode_db.insert(episode)
 
-    print(f"added {first_filename}")
+        print(f"added {filename}")
 
 
 cmd_add.set_defaults(command=run_add)
@@ -353,8 +353,6 @@ def run_test_gateway(args):
         episode_db = TinyDB(home.joinpath("episodes.json").as_posix())
         episodes = episode_db.all()
         #print(episodes)
-
-        #arr = [(gateway,episode['enclosures'][0]['hash']) for gateway in gateways for episode in episodes]
 
         #one by one
         for gateway in gateways:

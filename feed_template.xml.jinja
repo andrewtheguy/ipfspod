@@ -4,12 +4,11 @@
 <channel>
   <title>{{ channel.title }}</title>
   <link>{{ channel.link }}</link>
-  <!--<atom:link href="https://podcasts.andrewtheguy.com/am1430/feed.xml" rel="self" type="application/rss+xml" />-->
-  <description>{{ channel.desc }} </description>
-  <generator>Podcast Generator 2.7 - http://www.podcastgenerator.net</generator>
+  <description>{{ channel.description }} </description>
+  <generator>na</generator>
   <lastBuildDate>{{ now }}</lastBuildDate>
-  <language>en</language>
-  <copyright>Your copyright notice</copyright>
+  <language>{{ channel.language }}</language>
+  <copyright>{{ channel.copyright }}</copyright>
   <itunes:image href="https://ipfs.io/ipfs/QmdhW3UzaAravidM1ZFKrKcVNNLjS9DFFMpaFGYb31mpLh" />
   <image>
   <url>https://ipfs.io/ipfs/QmdhW3UzaAravidM1ZFKrKcVNNLjS9DFFMpaFGYb31mpLh</url>
@@ -35,23 +34,19 @@
       <description>Podcast Episode</description>
     <link>{{
       episode.link
-      or episode.enclosures
-      and ("https://ipfs.io/ipfs/"+episode.enclosures[0].hash)
+      or episode.enclosure.hash
     }}</link>
-    <guid>{{ episode.hash }}</guid>
+    <guid>{{ episode.hash_md5 }}</guid>
           {% for enclosure in episode.enclosures %}
       <enclosure
         url="https://ipfs.io/ipfs/{{ enclosure.hash }}"
         length="{{ enclosure.len }}"
         type="{{ enclosure.type }}" />
-    {% endfor %}
-      <!--<enclosure url="https://podcasts.andrewtheguy.com/am1430/media/202005231730_健保縱橫1.mp3" length="21600956" type="audio/mpeg"/>
-      <guid>https://podcasts.andrewtheguy.com/am1430/?name=202005231730_健保縱橫1.mp3</guid>-->
       <!--<itunes:duration>45:00</itunes:duration>-->
       <author>{{ episode.author }}</author>
       <itunes:author>{{ episode.author }}</itunes:author>
       <itunes:explicit>no</itunes:explicit>
-      <pubDate>{{ episode.date }}</pubDate><!-- substitute with file ts-->
+      <pubDate>{{ episode.date }}</pubDate>
       </item>
     {% endfor %}
 </channel>

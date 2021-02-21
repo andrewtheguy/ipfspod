@@ -36,8 +36,7 @@ want.
 > to that directory
 
 ```sh
-./ipfspod.py add isnt_nature_neat \
-    -f the_cool_lizard.webm \
+./ipfspod.py add isnt_nature_neat -f the_cool_lizard.webm \
     -t 'Found a lizard in the back yard, neat!' #optional
 
 # Most RSS metadata is supported, like --link, --source, and --author
