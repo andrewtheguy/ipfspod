@@ -321,7 +321,7 @@ def download_with_curl(gateway,hash):
 
 
     with open(f"./test/{gateway}/{hash}.log", "wb") as f:
-        p = Popen(["curl", url] , stdout=DEVNULL, stderr=f)
+        p = Popen(["curl", '-f', url] , stdout=DEVNULL, stderr=f)
         # or api way
         #p = Popen(["curl", '-X','POST', url] , stdout=DEVNULL, stderr=f)
         p.wait() # wait for process to finish; this also sets the returncode variable inside 'res'
