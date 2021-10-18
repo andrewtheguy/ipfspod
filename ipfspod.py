@@ -187,7 +187,7 @@ def run_add(args):
             link=args.link,
             author=args.author or channel['managing_editor'],
             categories=args.category,
-            date=datetime.utcnow().strftime(r"%a, %d %b %Y %H:%M:%S +0000"), # <!-- TODO: substitute with file ts-->
+            date=datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S %z"), # <!-- TODO: substitute with file ts-->
             # Name the fields and include any we just indexed
             enclosure = enclosure,
             hash_md5=hash_md5,
@@ -231,7 +231,7 @@ def run_publish(args):
         
     home = get_channel_dir(args)
     channel = TinyDB(home.joinpath("channel.json").as_posix()).all()[0]
-    now = datetime.utcnow().strftime(r"%a, %d %b %Y %H:%M:%S +0000")
+    now = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S %z")
     episode_db = TinyDB(home.joinpath("episodes.json").as_posix())
     episodes = episode_db.all()
     print(channel)
